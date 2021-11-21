@@ -5,7 +5,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "dev": "nodemon --watch src -e ts,js,mjs src/index.mjs --exit"
+    "dev": "nodemon --watch src -e ts,js,mjs src/index.mjs"
   },
   "repository": {
     "type": "git",
