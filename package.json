@@ -1,0 +1,32 @@
+{
+  "name": "1loc-vscode",
+  "description": "VSCode Snippets for JavaScript utilities in one line of code (loc).",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src -e ts,js,mjs src/index.mjs --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeshifu/1loc-vscode.git"
+  },
+  "keywords": [
+    "vscode",
+    "1loc",
+    "javascript",
+    "utilities"
+  ],
+  "author": {
+    "name": "Luqman Olushi",
+    "url": "https://twitter.com/codeshifu"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codeshifu/1loc-vscode/issues"
+  },
+  "homepage": "https://github.com/codeshifu/1loc-vscode#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
