@@ -1,56 +1,18 @@
-import fs from "fs";
-import glob from "glob";
-import { dirname, join, resolve } from "path";
-import { fileURLToPath } from "url";
-
 import {
-  parseMdTitleNCategory,
-  parseMdSnippet,
-  purifyMd,
-  purifySnippet,
-  snippetsFromMd,
-  addCredit,
-} from "./parser.mjs";
+  getSnippetsPath,
+  buildJSONSnippets,
+  writeSnippetToFile,
+} from "./utils.mjs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const SNIPPETS_PATH_PATTERN = "snippets/**/*.md";
+const ROOT_SNIPPETS_DIR = `${process.cwd()}/1loc/snippets`;
+const JS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/1loc.code-snippets`;
+const TS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/1loc-ts.code-snippets`;
 
-glob("snippets/**/*.md", { cwd: __dirname }, (err, matches) => {
-  if (err) throw new Error("No .md snippet file found.");
-
-  const snippetPaths = matches.map((path) => `${__dirname}/${path}`);
-
-  const parsedSnippets = snippetPaths
-    .map((snippetPath) => {
-      const snippetLocation = snippetPath.split("/").slice(-2).join("/");
-      const md = fs.readFileSync(snippetPath, "utf-8");
-      const result = {};
-      const { title } = parseMdTitleNCategory(md);
-      const jsSnippet = parseMdSnippet(
-        purifySnippet(snippetsFromMd(purifyMd(md)))
-      );
-
-      result[title] = {
-        prefix: `1loc${jsSnippet.name}`,
-        body: [
-          addCredit(snippetLocation),
-          ...jsSnippet.snippets.slice(0, 3).reduce((prev, curr) => {
-            if (!prev.length) return [curr];
-            return [...prev, "// or", curr];
-          }, []),
-        ],
-        description: title,
-      };
-
-      return result;
-    })
-    .reduce((prev, curr) => {
-      return {
-        ...prev,
-        ...curr,
-      };
-    }, {});
-
-  const snippetJSONFilePath = `${process.cwd()}/1loc/snippets/1loc.code-snippets`;
-  fs.writeFileSync(snippetJSONFilePath, JSON.stringify(parsedSnippets));
-});
+getSnippetsPath(SNIPPETS_PATH_PATTERN)
+  .then((snippetPaths) => {
+    const [jsSnippets, tsSnippets] = buildJSONSnippets(snippetPaths);
+    writeSnippetToFile(JS_1LOC_SNIPPETS_PATH, jsSnippets);
+    writeSnippetToFile(TS_1LOC_SNIPPETS_PATH, tsSnippets);
+  })
+  .catch(console.log);
