@@ -118,4 +118,4 @@ dist
 .pnp.*
 yarn.lock
 **/*.vsix
-test.js
+test\.*

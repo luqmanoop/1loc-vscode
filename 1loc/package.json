@@ -29,19 +29,11 @@
       },
       {
         "language": "typescript",
-        "path": "./snippets/1loc.code-snippets"
+        "path": "./snippets/1loc-ts.code-snippets"
       },
       {
         "language": "typescriptreact",
-        "path": "./snippets/1loc.code-snippets"
-      },
-      {
-        "language": "typescript",
-        "path": "./snippets/ts-snippets.json"
-      },
-      {
-        "language": "typescriptreact",
-        "path": "./snippets/ts-snippets.json"
+        "path": "./snippets/1loc-ts.code-snippets"
       }
     ]
   },
