@@ -25,23 +25,29 @@ glob("snippets/**/*.md", { cwd: __dirname }, (err, matches) => {
       const snippetLocation = snippetPath.split("/").slice(-2).join("/");
       const md = fs.readFileSync(snippetPath, "utf-8");
       const result = {};
-      const { category, title } = parseMdTitleNCategory(md);
+      const { title } = parseMdTitleNCategory(md);
       const jsSnippet = parseMdSnippet(
         purifySnippet(snippetsFromMd(purifyMd(md)))
       );
 
       result[title] = {
         prefix: `1loc${jsSnippet.name}`,
-        body: [addCredit(jsSnippet.code, snippetLocation)],
+        body: [
+          addCredit(snippetLocation),
+          ...jsSnippet.snippets.slice(0, 3).reduce((prev, curr) => {
+            if (!prev.length) return [curr];
+            return [...prev, "// or", curr];
+          }, []),
+        ],
         description: title,
       };
 
       return result;
     })
-    .reduce((a, b) => {
+    .reduce((prev, curr) => {
       return {
-        ...a,
-        ...b,
+        ...prev,
+        ...curr,
       };
     }, {});
 

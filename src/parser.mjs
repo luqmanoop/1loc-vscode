@@ -1,6 +1,6 @@
 export const purifyMd = (mdStr) => {
   return mdStr
-    .replace(/\/\/.*/g, "") // remove everything after comment `//`
+    .replace(/\/\/.*/g, "") // remove comment `// Or`
     .replace(/\n/g, "") // remove newline and keep inline content
     .replace(/\*\*```/g, "**\n```") // add newline after bold headline i.e. **JavaScript version**\n
     .replace(/```\*\*/g, "```\n**"); // start newline between closing blockquote & bold headline i.e. ````\n**JavaScript version**
@@ -14,7 +14,6 @@ export const snippetsFromMd = (purifiedMd, lang = "javascript") => {
   const snippet = purifiedMd.match(regex);
 
   if (!snippet) throw new Error(`No ${lang} snippet found`);
-
   return snippet[0];
 };
 
@@ -31,9 +30,18 @@ export const purifySnippet = (snippet, langExtension = "js") => {
 };
 
 export const parseMdSnippet = (purifiedSnippet) => {
+  const functionName = purifiedSnippet.split(" ")[1];
+
+  const snippets = purifiedSnippet
+    .split(RegExp(`const ${functionName} = `))
+    .filter(Boolean)
+    .map((anonymousFn) => {
+      return `const ${functionName} = ${anonymousFn}`;
+    });
+
   return {
-    code: purifiedSnippet,
-    name: purifiedSnippet.split(" ")[1],
+    name: functionName,
+    snippets,
   };
 };
 
@@ -52,7 +60,6 @@ export const parseMdTitleNCategory = (md) => {
     }, {});
 };
 
-export const addCredit = (codeSnippet, filePath) => {
-  const credit = `// https://github.com/1milligram/1loc/blob/master/snippets/${filePath}`;
-  return `${credit} \n${codeSnippet}`;
+export const addCredit = (filePath) => {
+  return `// https://github.com/1milligram/1loc/blob/master/snippets/${filePath}`;
 };
