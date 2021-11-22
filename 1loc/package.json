@@ -1,20 +1,52 @@
 {
-    "name": "1loc",
-    "displayName": "1loc",
-    "description": "Code snippets for JavaScript utilities in one line of code (loc)",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.62.0"
-    },
-    "categories": [
-        "Snippets"
-    ],
-    "contributes": {
-        "snippets": [
-            {
-                "language": "'javascript', 'typescript'",
-                "path": "./snippets/snippets.code-snippets"
-            }
-        ]
-    }
+  "name": "1loc",
+  "displayName": "1loc",
+  "description": "Code snippets for JavaScript utilities in one line of code (loc)",
+  "version": "0.0.1",
+  "publisher": "codeshifu",
+  "engines": {
+    "vscode": "^1.62.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "1loc",
+    "JavaScript",
+    "TypeScript",
+    "node",
+    "snippet"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/1loc.code-snippets"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/1loc.code-snippets"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/1loc.code-snippets"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/1loc.code-snippets"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/ts-snippets.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/ts-snippets.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeshifu/1loc-vscode"
+  }
 }
