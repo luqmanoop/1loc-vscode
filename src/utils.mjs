@@ -29,9 +29,19 @@ export const writeSnippetToFile = (path, jsonSnippet) => {
 };
 
 export const buildCodeSnippet = ({ title, name, snippets, credit }) => {
+  const similarSnippets =
+    snippets.length > 1
+      ? [
+          "",
+          "$BLOCK_COMMENT_START OR",
+          ...snippets.slice(1, 4),
+          "$BLOCK_COMMENT_END",
+        ]
+      : [];
+
   return {
     prefix: `1loc${name}`,
-    body: [credit, snippets[0], "", "/* or", ...snippets.slice(1, 4), "*/"],
+    body: [credit, snippets[0], ...similarSnippets],
     description: title,
   };
 };
