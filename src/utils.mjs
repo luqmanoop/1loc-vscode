@@ -28,7 +28,15 @@ export const writeSnippetToFile = (path, jsonSnippet) => {
   fs.writeFileSync(path, jsonSnippet);
 };
 
-export const buildJSONSnippets = (snippetPaths) => {
+export const buildCodeSnippet = ({ title, name, snippets, credit }) => {
+  return {
+    prefix: `1loc${name}`,
+    body: [credit, snippets[0], "", "/* or", ...snippets.slice(1, 4), "*/"],
+    description: title,
+  };
+};
+
+export const getLanguageSnippets = (snippetPaths) => {
   return snippetPaths
     .map((snippetPath) => {
       const snippetLocation = snippetPath.split("/").slice(-2).join("/");
@@ -46,29 +54,17 @@ export const buildJSONSnippets = (snippetPaths) => {
         purifySnippet(snippetsFromMd(purifiedMd, "typescript"), "ts")
       );
 
-      result.js[title] = {
-        prefix: `1loc${jsSnippet.name}`,
-        body: [
-          addCredit(snippetLocation),
-          ...jsSnippet.snippets.slice(0, 3).reduce((prev, curr) => {
-            if (!prev.length) return [curr];
-            return [...prev, "// or", curr];
-          }, []),
-        ],
-        description: title,
-      };
+      result.js[title] = buildCodeSnippet({
+        title,
+        ...jsSnippet,
+        credit: addCredit(snippetLocation),
+      });
 
-      result.ts[title] = {
-        prefix: `1loc${tsSnippet.name}`,
-        body: [
-          addCredit(snippetLocation),
-          ...tsSnippet.snippets.slice(0, 3).reduce((prev, curr) => {
-            if (!prev.length) return [curr];
-            return [...prev, "// or", curr];
-          }, []),
-        ],
-        description: title,
-      };
+      result.ts[title] = buildCodeSnippet({
+        title,
+        ...tsSnippet,
+        credit: addCredit(snippetLocation),
+      });
 
       return result;
     })

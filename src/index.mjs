@@ -1,6 +1,6 @@
 import {
   getSnippetsPath,
-  buildJSONSnippets,
+  getLanguageSnippets,
   writeSnippetToFile,
 } from "./utils.mjs";
 
@@ -11,7 +11,7 @@ const TS_1LOC_SNIPPETS_PATH = `${ROOT_SNIPPETS_DIR}/1loc-ts.code-snippets`;
 
 getSnippetsPath(SNIPPETS_PATH_PATTERN)
   .then((snippetPaths) => {
-    const [jsSnippets, tsSnippets] = buildJSONSnippets(snippetPaths);
+    const [jsSnippets, tsSnippets] = getLanguageSnippets(snippetPaths);
     writeSnippetToFile(JS_1LOC_SNIPPETS_PATH, jsSnippets);
     writeSnippetToFile(TS_1LOC_SNIPPETS_PATH, tsSnippets);
   })
