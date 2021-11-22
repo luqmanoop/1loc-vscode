@@ -6,27 +6,40 @@ export const purifyMd = (mdStr) => {
     .replace(/```\*\*/g, "```\n**"); // start newline between closing blockquote & bold headline i.e. ````\n**JavaScript version**
 };
 
-export const snippetsFromMd = (purifiedMd, lang = "javascript") => {
+export const findLanguageSnippetsFromMd = (lang, purifiedMd) => {
   const regex = new RegExp(
     `((\\*\\*(${lang}) version\\*\\*)(\\n.*\\n?))+`,
     "gi"
   );
   const snippet = purifiedMd.match(regex);
 
-  if (!snippet) throw new Error(`No ${lang} snippet found`);
-  return snippet[0];
+  return !snippet
+    ? findLanguageSnippetsFromMd("javascript", purifiedMd) // default to js if no ts snippets found
+    : snippet[0];
 };
 
-export const purifySnippet = (snippet, langExtension = "js") => {
-  return snippet
-    .replace(/```js/g, "")
-    .replace(/;```/g, ";\n```")
-    .replace(/(\*\*.*\*\*)/g, `\`\`\`${langExtension}`)
-    .split(`\`\`\`${langExtension}`)[1]
-    .slice(0, -4)
-    .replace(/\s{2,}\./g, ".")
-    .replace(/\s{2,}/g, " ")
-    .replace(/\n/g, "");
+export const snippetsFromMd = (purifiedMd, lang = "javascript") => {
+  const snippet = findLanguageSnippetsFromMd(lang, purifiedMd);
+
+  if (!snippet) throw new Error(`No ${lang} snippet found`);
+  return snippet;
+};
+
+export const purifySnippet = (snippet, langExt = "js") => {
+  return (
+    snippet
+      // currently, all snippets code block assum 'js' alias, remove all ```js
+      .replace(/```js/g, "")
+      .replace(/;```/g, ";\n```")
+      /* replace all **JavaScript|TypeScript** with ```{langExt}
+        set snippets code block to use dynamic 'langExt' alias */
+      .replace(/(\*\*.*\*\*)/g, `\`\`\`${langExt}`)
+      .split(`\`\`\`${langExt}`)[1]
+      .slice(0, -4)
+      .replace(/\s{2,}\./g, ".")
+      .replace(/\s{2,}/g, " ")
+      .replace(/\n/g, "")
+  );
 };
 
 export const parseMdSnippet = (purifiedSnippet) => {
