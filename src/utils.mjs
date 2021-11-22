@@ -33,18 +33,11 @@ export const addCredit = (filePath) => {
 
 export const buildCodeSnippet = ({ title, name, snippets, credit }) => {
   const similarSnippets =
-    snippets.length > 1
-      ? [
-          "",
-          "${0:$BLOCK_COMMENT_START OR",
-          ...snippets.slice(1),
-          "$BLOCK_COMMENT_END}",
-        ]
-      : [];
+    snippets.length > 1 ? ["${1:", "/* OR", ...snippets.slice(1), "*/}"] : [];
 
   return {
     prefix: `1loc${name}`,
-    body: [`/** ${title} ${credit} */`, snippets[0], ...similarSnippets],
+    body: [`\${2:/** ${title} ${credit} */`, `}${snippets[0]}`, ...similarSnippets],
     description: title,
   };
 };
