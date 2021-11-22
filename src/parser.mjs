@@ -52,7 +52,7 @@ export const parseMdTitleNCategory = (md) => {
     }, {});
 };
 
-export const withCredit = (codeSnippet, filePath) => {
+export const addCredit = (codeSnippet, filePath) => {
   const credit = `// https://github.com/1milligram/1loc/blob/master/snippets/${filePath}`;
-  return `${credit}\n${codeSnippet}`;
+  return `${credit} \n${codeSnippet}`;
 };

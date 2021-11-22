@@ -28,5 +28,8 @@
   "homepage": "https://github.com/codeshifu/1loc-vscode#readme",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "glob": "^7.2.0"
   }
 }
