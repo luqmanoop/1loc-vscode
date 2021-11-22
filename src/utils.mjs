@@ -10,7 +10,6 @@ import {
   purifyMd,
   purifySnippet,
   snippetsFromMd,
-  addCredit,
 } from "./parser.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,20 +27,24 @@ export const writeSnippetToFile = (path, jsonSnippet) => {
   fs.writeFileSync(path, jsonSnippet);
 };
 
+export const addCredit = (filePath) => {
+  return `https://github.com/1milligram/1loc/blob/master/snippets/${filePath}`;
+};
+
 export const buildCodeSnippet = ({ title, name, snippets, credit }) => {
   const similarSnippets =
     snippets.length > 1
       ? [
           "",
-          "$BLOCK_COMMENT_START OR",
-          ...snippets.slice(1, 4),
-          "$BLOCK_COMMENT_END",
+          "${0:$BLOCK_COMMENT_START OR",
+          ...snippets.slice(1),
+          "$BLOCK_COMMENT_END}",
         ]
       : [];
 
   return {
     prefix: `1loc${name}`,
-    body: [credit, snippets[0], ...similarSnippets],
+    body: [`/** ${title} ${credit} */`, snippets[0], ...similarSnippets],
     description: title,
   };
 };

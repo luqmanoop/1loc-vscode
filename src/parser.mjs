@@ -72,7 +72,3 @@ export const parseMdTitleNCategory = (md) => {
       };
     }, {});
 };
-
-export const addCredit = (filePath) => {
-  return `// https://github.com/1milligram/1loc/blob/master/snippets/${filePath}`;
-};
