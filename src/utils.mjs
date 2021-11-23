@@ -40,11 +40,7 @@ export const buildCodeSnippet = ({
 }) => {
   const similarSnippets =
     snippets.length > 1
-      ? [
-          `\n  --- OR ---`,
-          ...snippets.slice(1).map((v) => `  ${v}`),
-          "*/",
-        ]
+      ? [`\n  --- OR ---`, ...snippets.slice(1).map((v) => `  ${v}`)]
       : [];
 
   return {
@@ -53,6 +49,7 @@ export const buildCodeSnippet = ({
       `\${1:/**\n * ${title}`,
       ` * ${credit}`,
       ...similarSnippets,
+      '*/',
       `}${snippets[0]}`,
     ],
     description: title,
