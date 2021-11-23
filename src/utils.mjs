@@ -31,13 +31,30 @@ export const addCredit = (filePath) => {
   return `https://github.com/1milligram/1loc/blob/master/snippets/${filePath}`;
 };
 
-export const buildCodeSnippet = ({ title, name, snippets, credit }) => {
+export const buildCodeSnippet = ({
+  title,
+  name,
+  category,
+  snippets,
+  credit,
+}) => {
   const similarSnippets =
-    snippets.length > 1 ? ["${1:", "/* OR", ...snippets.slice(1), "*/}"] : [];
+    snippets.length > 1
+      ? [
+          `\n  --- OR ---`,
+          ...snippets.slice(1).map((v) => `  ${v}`),
+          "*/",
+        ]
+      : [];
 
   return {
-    prefix: `1loc${name}`,
-    body: [`\${2:/** ${title} ${credit} */`, `}${snippets[0]}`, ...similarSnippets],
+    prefix: [`1loc${name}`, `1loc${category.replace(/\s+/, "")}`],
+    body: [
+      `\${1:/**\n * ${title}`,
+      ` * ${credit}`,
+      ...similarSnippets,
+      `}${snippets[0]}`,
+    ],
     description: title,
   };
 };
@@ -50,7 +67,7 @@ export const getLanguageSnippets = (snippetPaths) => {
 
       const result = { js: {}, ts: {} };
 
-      const { title } = parseMdTitleNCategory(md);
+      const { title, category } = parseMdTitleNCategory(md);
       const purifiedMd = purifyMd(md);
 
       const jsSnippet = parseMdSnippet(
@@ -62,12 +79,14 @@ export const getLanguageSnippets = (snippetPaths) => {
 
       result.js[title] = buildCodeSnippet({
         title,
+        category,
         ...jsSnippet,
         credit: addCredit(snippetLocation),
       });
 
       result.ts[title] = buildCodeSnippet({
         title,
+        category,
         ...tsSnippet,
         credit: addCredit(snippetLocation),
       });
