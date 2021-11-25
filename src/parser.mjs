@@ -28,7 +28,8 @@ export const snippetsFromMd = (purifiedMd, lang = "javascript") => {
 export const purifySnippet = (snippet, langExt = "js") => {
   return (
     snippet
-      // currently, all snippets code block assum 'js' alias, remove all ```js
+      /* currently all snippets code block assume 'js' even TS code block
+         remove all ```js in favor of dynamic code block alias i.e. ```{langExt}*/
       .replace(/```js/g, "")
       .replace(/;```/g, ";\n```")
       /* replace all **JavaScript|TypeScript** with ```{langExt}
@@ -38,18 +39,20 @@ export const purifySnippet = (snippet, langExt = "js") => {
       .slice(0, -4)
       .replace(/\s{2,}\./g, ".")
       .replace(/\s{2,}/g, " ")
+      .replace(/(\(\s)/g, "(")
+      .replace(/(\s\))/g, ")")
       .replace(/\n/g, "")
   );
 };
 
 export const parseMdSnippet = (purifiedSnippet) => {
   const functionName = purifiedSnippet.split(" ")[1];
-
   const snippets = purifiedSnippet
-    .split(RegExp(`const ${functionName} = `))
+    .split(RegExp(`;const `))
     .filter(Boolean)
-    .map((anonymousFn) => {
-      return `const ${functionName} = ${anonymousFn}`;
+    .map((snippet, index) => {
+      if (index === 0) return `${snippet};`;
+      return `const ${snippet}`;
     });
 
   return {
