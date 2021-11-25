@@ -2,11 +2,11 @@
 
 <img src="src/images/logo.png" width="100" alt="1loc vscode logo"/>
 
-> A VSCode extension for common JavaScript utilities in one line of code (loc)!
+> VSCode extension for JavaScript utilities in one line of code (loc)!
 
 ## Motivation
 
-Time flies finding the snippets I want on the [1loc](https://1loc.dev) website. This was an attempt to make it easily accessible to have all snippets at my finger tips in the [code editor](https://code.visualstudio.com/) I (& millions of developers) use every day. This project was originally forked from [1loc](https://github.com/1milligram/1loc)
+Time flies finding the snippets I want on the [1loc](https://1loc.dev) website. This was an attempt to make it easily accessible to have all snippets at my fingertips in the [code editor](https://code.visualstudio.com/) I (& millions of developers) use every day. This project was originally forked from [1loc](https://github.com/1milligram/1loc)
 
 <img src="https://github.com/codeshifu/assets/blob/main/videos/1loc-vscode.gif?raw=true" alt="demo gif" width="550" />
 
@@ -43,6 +43,9 @@ yarn package
 ## Author
 
 <table><tr><td align="center"><a href="https://twitter.com/codeshifu"><img src="https://avatars0.githubusercontent.com/u/5154605?v=4" width="100px;" alt="Luqman Olushi O."/><br /><sub><b>Luqman Olushi O.</b></sub></a></table>
+
+## Support
+Please consider supporting me by subscribing to my [YouTube channel](https://www.youtube.com/channel/UCEJVuahEIFCjDSqSzOaZ7yg) 🙏🏽
 
 ## License
 
