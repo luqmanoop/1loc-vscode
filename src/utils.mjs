@@ -47,7 +47,6 @@ export const buildCodeSnippet = ({
               `  ${v
                 .replace(/\$/g, "\\$")
                 .replace(/\*\//g, "*\\/")
-                .replace(/{/g, "\\{")
                 .replace(/}/g, "\\}")}`
             // escape metacharacters that could interfere with VSCode placeholder
           ),
