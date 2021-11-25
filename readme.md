@@ -4,6 +4,9 @@
 
 > VSCode extension for JavaScript utilities in one line of code (loc)!
 
+## Install
+Install the extension from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=codeshifu.1loc)
+
 ## Motivation
 
 Time flies finding the snippets I want on the [1loc](https://1loc.dev) website. This was an attempt to make it easily accessible to have all snippets at my fingertips in the [code editor](https://code.visualstudio.com/) I (& millions of developers) use every day. This project was originally forked from [1loc](https://github.com/1milligram/1loc)
