@@ -8,9 +8,7 @@
 
 Time flies finding the snippets I want on the [1loc](https://1loc.dev) website. This was an attempt to make it easily accessible to have all snippets at my finger tips in the [code editor](https://code.visualstudio.com/) I (& millions of developers) use every day. This project was originally forked from [1loc](https://github.com/1milligram/1loc)
 
-<br />
-<img src="https://github.com/codeshifu/assets/blob/main/videos/1loc-vscode.gif?raw=true" alt="demo gif" />
-<br />
+<img src="https://github.com/codeshifu/assets/blob/main/videos/1loc-vscode.gif?raw=true" alt="demo gif" width="550" />
 
 ## Run it locally
 
