@@ -2,8 +2,8 @@
   "name": "1loc",
   "displayName": "1loc",
   "description": "Code snippets for JavaScript utilities in one line of code (loc)",
-  "version": "0.0.1",
-  "publisher": "Luqman Olushi",
+  "version": "1.0.0",
+  "publisher": "codeshifu",
   "engines": {
     "vscode": "^1.62.0"
   },
