@@ -51,7 +51,7 @@ export const parseMdSnippet = (purifiedSnippet) => {
     .split(RegExp(`;const `))
     .filter(Boolean)
     .map((snippet, index) => {
-      if (index === 0) return `${snippet};`;
+      if (index === 0) return `${snippet}`;
       return `const ${snippet}`;
     });
 
