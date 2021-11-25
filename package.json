@@ -5,7 +5,9 @@
     "node": ">=14"
   },
   "scripts": {
-    "dev": "nodemon --watch src -e ts,js,mjs src/index.mjs"
+    "dev": "nodemon --watch src -e ts,js,mjs src/index.mjs",
+    "build": "node src/index.mjs",
+    "package": "yarn build && cd extension && vsce package"
   },
   "repository": {
     "type": "git",
