@@ -3,13 +3,15 @@
   "displayName": "1loc",
   "description": "Code snippets for JavaScript utilities in one line of code (loc)",
   "version": "0.0.1",
-  "publisher": "codeshifu",
+  "publisher": "Luqman Olushi",
   "engines": {
     "vscode": "^1.62.0"
   },
+  "license": "MIT",
   "categories": [
     "Snippets"
   ],
+  "icon": "icon.png",
   "keywords": [
     "1loc",
     "JavaScript",
