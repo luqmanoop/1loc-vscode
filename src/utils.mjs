@@ -42,11 +42,15 @@ export const buildCodeSnippet = ({
     snippets.length > 1
       ? [
           `\n  // Similar 👇🏼`,
-          ...snippets
-            .slice(1)
-            .map(
-              (v) => `  ${v.replace(/\$/g, "\\$").replace(/\*\//g, "*\\/")}`
-            ),
+          ...snippets.slice(1).map(
+            (v) =>
+              `  ${v
+                .replace(/\$/g, "\\$")
+                .replace(/\*\//g, "*\\/")
+                .replace(/{/g, "\\{")
+                .replace(/}/g, "\\}")}`
+            // escape metacharacters that could interfere with VSCode placeholder
+          ),
         ]
       : [];
 
